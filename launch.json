@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "app (React + Vite)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 5173
+    },
+    {
+      "name": "rimacafe (Static)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "C:\\Users\\yihui\\OneDrive\\ドキュメント\\社会人\\rimacafe"],
+      "port": 3000
+    }
+  ,{
+      "name": "portfolio",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "3334", "C:\\Users\\yihui\\OneDrive\\ドキュメント\\社会人\\self_introduction"],
+      "port": 3334
+    }
+  ]
+}
