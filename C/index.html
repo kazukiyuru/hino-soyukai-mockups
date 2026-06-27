@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日野走友会｜トップ</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<link rel="stylesheet" href="common.css?v=10">
+</head>
+<body>
+<div id="splash">
+  <div id="splash_logo">
+    <img src="../assets/logo/logo.png" alt="日野走友会 HRC Hino Runners Club ロゴ">
+    <p>走れなくても、歩いて参加できるランニングクラブ</p>
+  </div>
+</div>
+<header>
+  <img src="../assets/logo/logo.png" alt="日野走友会 HRC Hino Runners Club ロゴ" class="site-logo">
+  <h1>日野走友会</h1>
+  <p>走れなくても、歩いて参加できるクラブです（創立1976年）</p>
+</header>
+
+<button class="hamburger" id="hamburger-btn" aria-label="メニューを開く" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+
+<div class="skip">文字が大きく、見やすいホームページです</div>
+
+<nav>
+  <a href="index.html" class="current">トップ</a>
+  <div class="has-dropdown">
+    <a href="#" class="dropdown-toggle">資料・活動記録 ▼</a>
+    <div class="dropdown-menu">
+      <a href="overview.html">会を知る俯瞰記事</a>
+      <a href="blog.html">ブログ</a>
+      <a href="reports.html">活動報告</a>
+      <a href="results.html">大会結果</a>
+      <a href="posts.html">投稿写真</a>
+      <a href="entries.html">大会出場予定</a>
+      <a href="attendance.html">朝練参加者数</a>
+      <a href="newsletter.html">会報表紙ページ</a>
+      <a href="records.html">歴代記録集</a>
+      <a href="ranking.html">ランキング集</a>
+      <a href="yearly.html">年度活動記録</a>
+      <a href="anthem.html">会歌</a>
+      <a href="history.html">沿革</a>
+    </div>
+  </div>
+  <div class="has-dropdown">
+    <a href="#" class="dropdown-toggle">募集案内 ▼</a>
+    <div class="dropdown-menu">
+      <a href="join.html">会員募集</a>
+      <a href="schedule.html">朝練行事予定</a>
+      <a href="venue.html">朝練会場</a>
+      <a href="course.html">朝練コース</a>
+    </div>
+  </div>
+  <a href="access.html">アクセス</a>
+  <a href="contact.html">お問い合わせ</a>
+</nav>
+
+<div class="hero">
+  <ul class="hero-slider">
+    <li><img loading="lazy" src="../assets/gallery/510.jpg"></li>
+    <li><img loading="lazy" src="../assets/gallery/517.jpg"></li>
+    <li><img loading="lazy" src="../assets/gallery/531.jpg"></li>
+    <li><img loading="lazy" src="../assets/gallery/607.jpg"></li>
+    <li><img loading="lazy" src="../assets/gallery/614.jpg"></li>
+    <li><img loading="lazy" src="../assets/gallery/621.jpg"></li>
+  </ul>
+  <p class="hero-subtitle">毎週日曜の朝、大木島自然公園に集まっています</p>
+</div>
+
+<section id="news">
+  <h3>お知らせ</h3>
+  <div class="notice">
+    <ul>
+      <li>朝練の集合時間：夏は7時30分、冬は8時00分です</li>
+      <li>会報「日野走友会だより」を更新しました</li>
+      <li>大会の結果を掲載しました（<a href="results.html">こちらから見られます</a>）</li>
+    </ul>
+  </div>
+</section>
+
+<section id="about">
+  <h3>クラブについて</h3>
+  <div class="info-box">
+    <p>1976年5月7日（昭和51年）にできた、活動歴49年の歴史あるランニングクラブです。</p>
+    <p>今は48人（男性33名、女性15名）の会員が、日野市を中心に活動しています。（2026年5月1日現在）</p>
+    <p>走るのが苦手な方も、歩いての参加が可能です。</p>
+  </div>
+</section>
+
+<section id="gallery">
+  <h3>投稿写真</h3>
+  <div class="photo-grid">
+    <img loading="lazy" src="../assets/gallery/510.jpg">
+    <img loading="lazy" src="../assets/gallery/517.jpg">
+  </div>
+  <p style="margin-top:16px;"><a href="posts.html">投稿写真をもっと見る</a></p>
+</section>
+
+<section id="join">
+  <h3>参加してみたい方へ</h3>
+  <p>年齢や経験は問いません。見学だけでも大歓迎です。</p>
+  <a class="big-button" href="contact.html">見学・参加について聞く</a>
+  <a class="big-button alt" href="join.html">入会案内を見る</a>
+</section>
+
+<footer>
+  <img src="../assets/logo/logo.png" alt="日野走友会 HRC Hino Runners Club ロゴ" class="footer-logo">
+  <p>© 日野走友会 HRC Hino Runners Club　東京都日野市</p>
+</footer>
+<a href="#" id="page-top" aria-label="ページの先頭へ戻る">▲<span>上へ</span></a>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+  $(function () {
+    $('.hero-slider').slick({
+      fade: true,
+      autoplay: true,
+      autoplaySpeed: 3500,
+      speed: 1000,
+      arrows: false,
+      dots: true,
+      infinite: true
+    });
+  });
+</script>
+<script src="nav.js?v=7"></script>
+</body>
+</html>
