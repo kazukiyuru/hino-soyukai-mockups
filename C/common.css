@@ -94,6 +94,12 @@ form.contact-form label{ display:block; margin-bottom:8px; font-weight:bold; fon
 form.contact-form input, form.contact-form textarea{ width:100%; padding:14px; margin-bottom:20px; border:2px solid var(--blue); border-radius:8px; font-size:20px; }
 form.contact-form button{ background:var(--yellow); color:#222; border:none; padding:18px 30px; font-size:22px; border-radius:14px; font-weight:bold; cursor:pointer; width:100%; transition:border-radius .3s ease-out; }
 form.contact-form button:hover{ border-radius:32px; }
+form.contact-form button:disabled{ opacity:0.6; cursor:not-allowed; }
+.required{ color:#c0392b; font-size:0.85em; font-weight:bold; margin-left:6px; }
+fieldset.radio-group{ border:2px solid var(--blue); border-radius:10px; padding:14px 18px; margin:0 0 20px; }
+fieldset.radio-group legend{ font-weight:bold; padding:0 8px; font-size:20px; }
+fieldset.radio-group label{ display:inline-flex; align-items:center; gap:8px; margin-right:24px; font-weight:normal; cursor:pointer; }
+fieldset.radio-group input[type="radio"]{ width:22px; height:22px; }
 footer{ text-align:center; padding:30px; font-size:16px; background:#eef5fb; color:#333; }
 
 

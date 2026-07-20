@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日野走友会｜お問い合わせ</title>
-<link rel="stylesheet" href="common.css?v=16">
+<link rel="stylesheet" href="common.css?v=18">
 </head>
 <body>
 <header>
@@ -52,14 +52,45 @@
   <h3>お問い合わせ</h3>
   <p class="tel">📞 042-〇〇〇-〇〇〇〇</p>
   <p style="text-align:center;">受付時間：午前9時〜午後5時</p>
-  <form class="contact-form">
-    <label>お名前</label>
-    <input type="text" placeholder="山田 太郎">
-    <label>メールアドレス</label>
-    <input type="email" placeholder="example@mail.com">
-    <label>お問い合わせ内容</label>
-    <textarea rows="5" placeholder="見学希望の旨など、ご自由にご記入ください"></textarea>
-    <button type="button">送信する（デモ）</button>
+  <form class="contact-form" data-web3forms-key="YOUR_ACCESS_KEY_HERE">
+    <label for="name">お名前（全角）<span class="required">必須</span></label>
+    <input type="text" id="name" name="name" placeholder="山田 太郎">
+
+    <fieldset class="radio-group">
+      <legend>性別</legend>
+      <label><input type="radio" name="gender" value="male"> 男性</label>
+      <label><input type="radio" name="gender" value="female"> 女性</label>
+    </fieldset>
+
+    <label for="age">年齢（半角数字）</label>
+    <input type="number" id="age" name="age" min="0" max="120" placeholder="65">
+
+    <label for="email">メールアドレス<span class="required">必須</span></label>
+    <input type="email" id="email" name="email" placeholder="example@mail.com">
+    <label for="email2">メールアドレス（確認用・同じものを再入力）<span class="required">必須</span></label>
+    <input type="email" id="email2" name="email2" placeholder="example@mail.com">
+
+    <fieldset class="radio-group category">
+      <legend>ご連絡種別（いずれか1つ）<span class="required">必須</span></legend>
+      <label><input type="radio" name="category" value="join"> 入会申し込み</label>
+      <label><input type="radio" name="category" value="trial"> 体験参加申し込み</label>
+      <label><input type="radio" name="category" value="question"> 問い合わせ</label>
+      <label><input type="radio" name="category" value="other"> その他</label>
+    </fieldset>
+
+    <label for="date">朝練参加希望日（半角・例：01-01）</label>
+    <input type="text" id="date" name="date" placeholder="例：01-01（1月1日）">
+
+    <label for="message">メッセージ<span class="required">必須</span></label>
+    <textarea id="message" name="message" rows="5" placeholder="見学希望の旨など、ご自由にご記入ください"></textarea>
+
+    <label for="address">住所（全角）</label>
+    <input type="text" id="address" name="address" placeholder="例：東京都日野市万願寺6丁目6番地">
+
+    <label for="phone">連絡先（携帯）電話番号（半角）</label>
+    <input type="tel" id="phone" name="phone" placeholder="例：090-0000-0000">
+
+    <button type="button">送信する</button>
   </form>
 </section>
 
@@ -68,6 +99,6 @@
   <p>© 日野走友会 HRC Hino Runners Club　東京都日野市</p>
 </footer>
 <a href="#" id="page-top" aria-label="ページの先頭へ戻る">▲<span>上へ</span></a>
-<script src="nav.js?v=11"></script>
+<script src="nav.js?v=13"></script>
 </body>
 </html>

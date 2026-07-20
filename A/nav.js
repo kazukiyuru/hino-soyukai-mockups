@@ -100,42 +100,97 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { passive: true });
 })();
 
-// E フォームバリデーション
+// E フォームバリデーション ＋ Web3Forms送信
 (function () {
   var form = document.querySelector('form.contact-form');
   if (!form) return;
-  function showError(input, msg) {
-    var err = input.parentElement.querySelector('.form-error');
+  var CATEGORY_LABELS = { join: '入会申し込み', trial: '体験参加申し込み', question: '問い合わせ', other: 'その他' };
+  var GENDER_LABELS = { male: '男性', female: '女性' };
+  function showError(target, msg) {
+    var err = target.parentElement.querySelector('.form-error');
     if (!err) {
       err = document.createElement('p');
       err.className = 'form-error';
-      input.parentElement.insertBefore(err, input.nextSibling);
+      target.parentElement.insertBefore(err, target.nextSibling);
     }
     err.textContent = msg;
-    input.classList.add('input-error');
+    target.classList.add('input-error');
   }
-  function clearError(input) {
-    var err = input.parentElement.querySelector('.form-error');
+  function clearError(target) {
+    var err = target.parentElement.querySelector('.form-error');
     if (err) err.textContent = '';
-    input.classList.remove('input-error');
+    target.classList.remove('input-error');
   }
   var submitBtn = form.querySelector('button');
   if (!submitBtn) return;
   submitBtn.addEventListener('click', function () {
-    var nameEl  = form.querySelector('input[type="text"]');
-    var emailEl = form.querySelector('input[type="email"]');
-    var msgEl   = form.querySelector('textarea');
+    var nameEl     = form.querySelector('#name');
+    var emailEl    = form.querySelector('#email');
+    var email2El   = form.querySelector('#email2');
+    var categoryFs = form.querySelector('fieldset.category');
+    var msgEl      = form.querySelector('#message');
+    var targets = [nameEl, emailEl, email2El, categoryFs, msgEl].filter(Boolean);
     var ok = true;
-    [nameEl, emailEl, msgEl].forEach(clearError);
-    if (nameEl && !nameEl.value.trim())  { showError(nameEl, '※ お名前を入力してください'); ok = false; }
+    targets.forEach(clearError);
+    if (nameEl && !nameEl.value.trim()) { showError(nameEl, '※ お名前を入力してください'); ok = false; }
     if (emailEl) {
       if (!emailEl.value.trim()) { showError(emailEl, '※ メールアドレスを入力してください'); ok = false; }
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) { showError(emailEl, '※ 正しいメールアドレスの形式で入力してください'); ok = false; }
     }
-    if (msgEl && !msgEl.value.trim()) { showError(msgEl, '※ お問い合わせ内容を入力してください'); ok = false; }
-    if (ok) {
-      form.innerHTML = '<p style="text-align:center;padding:40px 0;font-size:1.1em;">送信が完了しました。ありがとうございました。</p>';
+    if (email2El) {
+      if (!email2El.value.trim()) { showError(email2El, '※ 確認用のメールアドレスを入力してください'); ok = false; }
+      else if (emailEl && email2El.value.trim() !== emailEl.value.trim()) { showError(email2El, '※ メールアドレスが一致しません'); ok = false; }
     }
+    if (categoryFs) {
+      var checked = categoryFs.querySelector('input[name="category"]:checked');
+      if (!checked) { showError(categoryFs, '※ ご連絡種別を選択してください'); ok = false; }
+    }
+    if (msgEl && !msgEl.value.trim()) { showError(msgEl, '※ メッセージを入力してください'); ok = false; }
+    if (!ok) return;
+
+    var accessKey = form.getAttribute('data-web3forms-key');
+    if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
+      form.innerHTML = '<p style="text-align:center;padding:40px 0;font-size:1.1em;">送信が完了しました。ありがとうございました。</p>';
+      return;
+    }
+
+    var categoryLabel = CATEGORY_LABELS[checked.value] || checked.value;
+    var genderEl = form.querySelector('input[name="gender"]:checked');
+    var genderLabel = genderEl ? (GENDER_LABELS[genderEl.value] || genderEl.value) : '未回答';
+
+    var payload = {
+      access_key: accessKey,
+      subject: '【日野走友会サイト】' + categoryLabel + ' - ' + nameEl.value.trim() + '様',
+      from_name: '日野走友会サイト',
+      replyto: emailEl.value.trim(),
+      botcheck: '',
+      name: nameEl.value.trim(),
+      性別: genderLabel,
+      年齢: (form.querySelector('#age') || {}).value || '未回答',
+      メールアドレス: emailEl.value.trim(),
+      ご連絡種別: categoryLabel,
+      朝練参加希望日: (form.querySelector('#date') || {}).value || '未回答',
+      メッセージ: msgEl.value.trim(),
+      住所: (form.querySelector('#address') || {}).value || '未回答',
+      電話番号: (form.querySelector('#phone') || {}).value || '未回答'
+    };
+
+    submitBtn.disabled = true;
+    var originalLabel = submitBtn.textContent;
+    submitBtn.textContent = '送信中…';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (res) { return res.json(); }).then(function (data) {
+      if (!data.success) throw new Error('send_failed');
+      form.innerHTML = '<p style="text-align:center;padding:40px 0;font-size:1.1em;">送信が完了しました。ありがとうございました。<br>担当者より折り返しご連絡いたします。</p>';
+    }).catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+      showError(msgEl, '※ 送信に失敗しました。時間をおいて再度お試しいただくか、お電話にてご連絡ください。');
+    });
   });
 })();
 
